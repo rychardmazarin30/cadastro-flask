@@ -1,12 +1,15 @@
+# importando LIBs que serão utilizadas
 from flask import  render_template, url_for, request, flash, redirect
 from formulario import app, mysql
 from formulario.forms import FormCadastro 
 import bcrypt
 
+# Rota da página de cadastro
 @app.route('/', methods=['GET', 'POST'])
 def cadastro():
     form_cadastro = FormCadastro()
     
+#     Isso é o que faz os validators do forms.py serem realmente utilizados nos campos, ele faz a verificação da requisição e se der erro ele retorna o validator
     if form_cadastro.validate_on_submit() and "submit_button" in request.form:
         # Definindo Informações do Usuário
         global username
@@ -28,6 +31,7 @@ def cadastro():
     
     return render_template("cadastro.html", form_cadastro=form_cadastro)
 
+# Rota da pagina que você é levado ao se cadastrar
 @app.route('/home')
 def home():
     return render_template('home.html', username=username)
