@@ -13,7 +13,7 @@
 
 ![MySQL](https://user-images.githubusercontent.com/98194579/185709033-3f478e3a-30ae-4664-ad1d-9873aa9ddf77.png)
 
-<p>Estando os validators ok, o usuário é cadastrado no banco de dados com sua senha criptografada. <strong>PS: </strong>Usei a Lib Bcrypt para criptografar as senhas no banco de dados</p>
+<p>Estando os validators ok, o usuário é cadastrado no banco de dados com sua senha criptografada. <strong>PS: </strong>Usei a Lib Bcrypt para criptografar as senhas no banco de dados. (Todos os e-mails são fictícios)</p>
 <p></p>
 
 <p>Simples mas integra várias funcionalidades legais do flask e do MySQL, espero que gostem.</p>
