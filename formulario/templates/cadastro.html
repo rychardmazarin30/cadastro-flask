@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap"
+    rel="stylesheet" />
+  <title>Cadastro</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins";
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: #fafafa;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      width: 400px;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .header {
+      background-color: #eee;
+      padding: 20px;
+    }
+
+    .form {
+      padding: 20px;
+    }
+
+    .form-control {
+      margin-bottom: 10px;
+      padding-bottom: 20px;
+      position: relative;
+    }
+
+    .form-control label {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+
+    .form-control input {
+      border: 2px solid;
+      display: block;
+      border-radius: 10px;
+      font-size: 14px;
+      width: 100%;
+      padding: 10px;
+    }
+
+    .form-control i {
+      position: absolute;
+      top: 45px;
+      right: 10px;
+      visibility: hidden;
+    }
+
+    .button {
+      background-color: #fc00ff;
+      border: 0 2px solid #fc00ff;
+      color: #fff;
+      width: 100%;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .button:hover {
+      background: #00dbde;
+      cursor: pointer;
+    }
+
+    .sucess {
+      border-color: #2ecc71;
+    }
+
+    .form-control.error input {
+      border-color: #e74c3c;
+    }
+
+    .form-control.sucess i.fa-check-circle {
+      color: #2ecc71;
+      visibility: visible;
+    }
+
+    .form-control.error i.fa-exclamation-circle {
+      color: #e74c3c;
+      visibility: visible;
+    }
+  </style>
+
+  {% block head %}
+  {% endblock %}
+  
+</head>
+
+<body>
+
+  {% with mensagens = get_flashed_messages(with_categories=True) %} 
+      {% if mensagens %}
+          {% for categoria, mensagem in mensagens%}
+          <div class="alert {{ categoria }}" role="alert ">
+              {{ mensagem }}
+          </div>
+          {% endfor %}
+      {% endif %}
+  {% endwith%}
+  
+  <div class="container">
+    <div class="header">
+      <h2>Criar Uma Conta</h2>
+    </div>
+
+    <form method="post" id="form" class="form">
+      {{ form_cadastro.csrf_token }}
+
+      {% if form_cadastro.username.errors %} 
+      <div class="form-control error">
+        {{ form_cadastro.username.label(for="username") }}
+        {{ form_cadastro.username(placeholder="Nome de Usuário") }}
+        <i class="fas fa-exclamation-circle"></i>
+        {% for erro in form_cadastro.username.errors %}
+          <span style="color: #e74c3c">{{ erro }}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="form-control">
+        {{ form_cadastro.username.label(for="username") }}
+        {{ form_cadastro.username(placeholder="Nome de Usuário") }}
+      </div>
+      {% endif %}
+
+      {% if form_cadastro.email.errors %} 
+      <div class="form-control error">
+        {{ form_cadastro.email.label(for="email") }}
+        {{ form_cadastro.email(placeholder="E-mail") }}
+        <i class="fas fa-exclamation-circle"></i>
+        {% for erro in form_cadastro.email.errors %}
+          <span style="color: #e74c3c">{{ erro }}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="form-control">
+        {{ form_cadastro.email.label(for="email") }}
+        {{ form_cadastro.email(placeholder="E-mail") }}
+      </div>
+      {% endif %}
+        
+      {% if form_cadastro.password.errors %} 
+      <div class="form-control error">
+        {{ form_cadastro.password.label(for="password") }}
+        {{ form_cadastro.password(placeholder="Senha") }}
+        <i class="fas fa-exclamation-circle"></i>
+        {% for erro in form_cadastro.password.errors %}
+          <span style="color: #e74c3c">{{ erro }}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="form-control">
+        {{ form_cadastro.password.label(for="password") }}
+        {{ form_cadastro.password(placeholder="Senha") }}
+      </div>
+      {% endif %}
+
+      {% if form_cadastro.confirm_password.errors %} 
+      <div class="form-control error">
+        {{ form_cadastro.confirm_password.label(for="confirm_password") }}
+        {{ form_cadastro.confirm_password(placeholder="Confirmação de Senha") }}
+        <i class="fas fa-exclamation-circle"></i>
+        {% for erro in form_cadastro.confirm_password.errors %}
+          <span style="color: #e74c3c">O campo deve ser igual a senha.</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="form-control">
+        {{ form_cadastro.confirm_password.label(for="confirm_password") }}
+        {{ form_cadastro.confirm_password(placeholder="Confirmação de Senha") }}
+      </div>
+      {% endif %}
+      {{ form_cadastro.submit_button(class="button") }}
+    </form>
+  </div>
+
+  {% block body %}
+  {% endblock %}
+
+  <script src="https://kit.fontawesome.com/7298691f2c.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
