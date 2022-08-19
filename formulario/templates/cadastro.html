@@ -113,16 +113,6 @@
 </head>
 
 <body>
-
-  {% with mensagens = get_flashed_messages(with_categories=True) %} 
-      {% if mensagens %}
-          {% for categoria, mensagem in mensagens%}
-          <div class="alert {{ categoria }}" role="alert ">
-              {{ mensagem }}
-          </div>
-          {% endfor %}
-      {% endif %}
-  {% endwith%}
   
   <div class="container">
     <div class="header">
