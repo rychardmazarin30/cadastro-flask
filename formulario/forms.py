@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from formulario import mysql
-import bcrypt
 
 class FormCadastro(FlaskForm):
     username = StringField("Nome de Usuário", validators=[DataRequired()])
